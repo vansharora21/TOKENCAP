@@ -1,0 +1,144 @@
+{
+  "name": "tokencap",
+  "displayName": "TokenCap",
+  "description": "Generate compact AI handoff snapshots for coding sessions from the CLI or VS Code/Cursor.",
+  "version": "0.1.0",
+  "private": false,
+  "publisher": "VanshArora21",
+  "license": "MIT",
+  "type": "commonjs",
+  "main": "./src/extension.js",
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/context_extension.git"
+  },
+  "keywords": ["vscode", "extension", "context", "capsule", "ai", "tokencap"],
+  "categories": ["Other"],
+  "bin": {
+    "tokencap": "./bin/tokencap.js"
+  },
+  "scripts": {
+    "capsule": "node ./bin/tokencap.js make",
+    "watch": "node ./bin/tokencap.js watch",
+    "check": "node --check ./src/capsule.js && node --check ./src/extension.js && node --check ./bin/tokencap.js && node --check ./test/capsule.test.js && node --check ./test/config.test.js && node --check ./test/watcher.test.js",
+    "test": "node ./test/capsule.test.js && node ./test/config.test.js && node ./test/watcher.test.js",
+    "prepublishOnly": "npm run check && npm run test",
+    "vsce:package": "npx @vscode/vsce package -o tokencap-0.1.0.vsix",
+    "vsce:publish": "npx @vscode/vsce publish --pat $VSCE_TOKEN"
+  },
+  "engines": {
+    "vscode": "^1.88.0",
+    "node": ">=18"
+  },
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:tokencap.make",
+    "onCommand:tokencap.open",
+    "onCommand:tokencap.initConfig",
+    "onCommand:tokencap.toggleAuto",
+    "onCommand:tokencap.showMenu"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "tokencap.make",
+        "title": "TokenCap: Make Now"
+      },
+      {
+        "command": "tokencap.open",
+        "title": "TokenCap: Open"
+      },
+      {
+        "command": "tokencap.initConfig",
+        "title": "TokenCap: Create Config"
+      },
+      {
+        "command": "tokencap.toggleAuto",
+        "title": "TokenCap: Toggle Auto Capture"
+      },
+      {
+        "command": "tokencap.showMenu",
+        "title": "TokenCap: Show Menu"
+      }
+    ],
+    "configuration": {
+      "title": "TokenCap",
+      "properties": {
+        "tokencap.autoCapture": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically refresh the tokencap snapshot after file saves."
+        },
+        "tokencap.debounceMs": {
+          "type": "number",
+          "default": 30000,
+          "description": "Minimum wait time after a save before regenerating the snapshot."
+        },
+        "tokencap.outputPath": {
+          "type": "string",
+          "default": "TOKENCAP.md",
+          "description": "Workspace-relative output file for the tokencap snapshot."
+        },
+        "tokencap.profile": {
+          "type": "string",
+          "enum": [
+            "compact",
+            "balanced",
+            "deep",
+            "gpt-4o",
+            "claude-3-5-sonnet",
+            "gemini-1.5-flash",
+            "gemini-1.5-pro",
+            "llama-3-8b"
+          ],
+          "default": "balanced",
+          "description": "Snapshot detail level/profile."
+        },
+        "tokencap.maxFiles": {
+          "type": "number",
+          "default": 90,
+          "description": "Maximum files included in the snapshot."
+        },
+        "tokencap.maxSourceBytes": {
+          "type": "number",
+          "default": 220000,
+          "description": "Approximate source byte budget for selected files."
+        },
+        "tokencap.maxFileBytes": {
+          "type": "number",
+          "default": 14000,
+          "description": "Maximum bytes of content copied from one file."
+        },
+        "tokencap.maxDiffBytes": {
+          "type": "number",
+          "default": 50000,
+          "description": "Maximum bytes of Git diff snippets included."
+        },
+        "tokencap.includeGitDiff": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include Git diff snippets in the snapshot."
+        },
+        "tokencap.includeFileContents": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include selected file contents in the snapshot."
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "@types/vscode": "^1.88.0",
+    "@vscode/vsce": "^2.0.0"
+  },
+  "dependencies": {
+    "chokidar": "^3.6.0"
+  }
+}
