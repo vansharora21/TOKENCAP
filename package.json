@@ -16,12 +16,21 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/context_extension.git"
+    "url": "git+https://github.com/vansharora21/TOKENCAP.git"
   },
-  "keywords": ["vscode", "extension", "context", "capsule", "ai", "tokencap"],
-  "categories": ["Other"],
+  "keywords": [
+    "vscode",
+    "extension",
+    "context",
+    "capsule",
+    "ai",
+    "tokencap"
+  ],
+  "categories": [
+    "Other"
+  ],
   "bin": {
-    "tokencap": "./bin/tokencap.js"
+    "tokencap": "bin/tokencap.js"
   },
   "scripts": {
     "capsule": "node ./bin/tokencap.js make",

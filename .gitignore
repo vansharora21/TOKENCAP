@@ -1,4 +1,4 @@
 node_modules/
 *.vsix
 .vscode-test/
-CONTEXT_CAPSULE.md
+TOKENCAP.md
