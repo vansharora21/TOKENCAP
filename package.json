@@ -1,7 +1,7 @@
 {
   "name": "tokencap",
   "displayName": "TokenCap",
-  "description": "Generate compact AI handoff snapshots for coding sessions from the CLI or VS Code/Cursor.",
+  "description": "Generate compact handoff snapshots for coding sessions from the CLI or VS Code.",
   "version": "0.1.0",
   "private": false,
   "publisher": "VanshArora21",

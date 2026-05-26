@@ -1,8 +1,8 @@
 # TokenCap
 
-TokenCap is an automatic AI coding handoff utility. It generates a production-ready, highly compressed `TOKENCAP.md` snapshot of your workspace. 
+TokenCap is an automatic coding handoff utility. It generates a production-ready, highly compressed `TOKENCAP.md` snapshot of your workspace.
 
-When your coding session is close to a context limit, a free-tier limit, or a handoff point, the next AI assistant reads this snapshot first to immediately continue with the correct files, Git status, separate diffs, project maps, and operating rules.
+When your coding session is near a handoff point or you need to capture context, this snapshot provides the key files, Git status, diffs, project map, and handoff notes to help another developer or tool continue work.
 
 ---
 
@@ -48,15 +48,11 @@ To customize settings, create a `.tokencap.json` file in the root of your worksp
 ```
 
 ### Context Profiles
-Use a profile to match different LLM context windows and maximize code generation accuracy:
+Use a profile to match different context sizes and capture depth:
 - **`compact`**: Smaller snapshot for tight context windows (max 45 files, 90KB budget).
 - **`balanced`**: Default production profile (max 90 files, 220KB budget).
 - **`deep`**: Deeper capture for complex codebases (max 140 files, 420KB budget).
-- **`gpt-4o`**: Balanced budgets for standard context (max 80 files, 150KB source budget, 10KB/file cap).
-- **`claude-3-5-sonnet`**: Tailored for Claude's 200k window (max 120 files, 250KB source budget, 15KB/file cap).
-- **`gemini-1.5-flash`**: High-volume profile for Gemini's 1M window (max 200 files, 600KB source budget, 30KB/file cap).
-- **`gemini-1.5-pro`**: Max-detail profile for Gemini's 2M window (max 400 files, 1.2MB source budget, 60KB/file cap).
-- **`llama-3-8b`**: Small, fast profile for local models (max 25 files, 40KB source budget, 4KB/file cap).
+- **`gpt-4o`**, **`claude-3-5-sonnet`**, **`gemini-1.5-flash`**, **`gemini-1.5-pro`**, **`llama-3-8b`**: These are advanced profiles that adjust budgets for larger or smaller context targets. Use the named profile when you need a different capture budget; otherwise stick with `compact`, `balanced`, or `deep`.
 
 ---
 
